@@ -3,8 +3,8 @@ const os = require('os');
 const fs = require('fs');
 const { execSync } = require('child_process');
 
-class d2Viz {
-    renderString(source, options) {
+class D2Viz {
+    renderString(source: string) {
         // Generate a unique file name
         const now = `${Date.now()}`;
         const tmpInFile = `${os.tmpdir()}/d2-${now}.d2`;
@@ -21,24 +21,26 @@ class d2Viz {
 
 function contentLoaded() {
     console.log("Content loaded");
-    var viz = new d2Viz();
+    var viz = new D2Viz();
     var d2Elements = document.getElementsByClassName('d2');
 
     var changes = [];
 
     for (let index = 0; index < d2Elements.length; index++) {
         var element = d2Elements.item(index);
-        var source = element.textContent;
+        var source = element?.textContent;
 
         changes.push({
-            placeholder: element.parentElement.parentElement,
-            svg: viz.renderString(source, {format:'svg'})
+            placeholder: element?.parentElement?.parentElement,
+            svg: viz.renderString(source ? source : "")
         });
     }
 
     for (let index = 0; index < changes.length; index++) {
         const change = changes[index];
+        // @ts-ignore
         change.svg.then(svg=> {
+            // @ts-ignore
             change.placeholder.outerHTML = svg;
         });
     }

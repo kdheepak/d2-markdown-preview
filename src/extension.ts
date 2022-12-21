@@ -11,9 +11,9 @@ export function activate(context: vscode.ExtensionContext) {
     console.log('Congratulations, your extension "d2-markdown-preview" is now active!');
 
     return {
-        extendMarkdownIt(md) {
+        extendMarkdownIt(md: any) {
             const highlight = md.options.highlight;
-            md.options.highlight = (code, lang) => {
+            md.options.highlight = (code: any, lang: any) => {
                 if (lang && lang.match(/\bd2\b/i)) {
                     return `<div class="d2">${code}</div>`;
                 }
