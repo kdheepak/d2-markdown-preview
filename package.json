@@ -1,6 +1,9 @@
 {
   "name": "d2-markdown-preview",
   "displayName": "d2-markdown-preview",
+  "repository": {
+    "url": "https://github.com/kdheepak/d2-markdown-preview"
+  },
   "description": "Add d2 markdown preview to VSCode builtin markdown preview",
   "version": "0.0.1",
   "engines": {
