@@ -14,15 +14,12 @@
     "Other"
   ],
   "activationEvents": [
-    "onLanguage:markdown"
+    "*"
   ],
   "main": "./out/extension.js",
   "contributes": {
     "markdown.previewStyles": [
       "./src/d2.css"
-    ],
-    "markdown.previewScripts": [
-      "./src/d2-render.ts"
     ],
     "markdown.markdownItPlugins": true
   },
