@@ -15,10 +15,10 @@
   "main": "./out/extension.js",
   "contributes": {
     "markdown.previewStyles": [
-      "./d2.css"
+      "./src/d2.css"
     ],
     "markdown.previewScripts": [
-      "./d2-render.ts"
+      "./src/d2-render.ts"
     ],
     "markdown.markdownItPlugins": true
   },
