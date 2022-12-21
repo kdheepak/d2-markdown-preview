@@ -21,6 +21,9 @@
     "markdown.previewStyles": [
       "./src/d2.css"
     ],
+    "markdown.previewScripts": [
+      "./src/d2-render.js"
+    ],
     "markdown.markdownItPlugins": true
   },
   "scripts": {

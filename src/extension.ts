@@ -42,21 +42,15 @@ export function matchD2Token(
 export function activate(context: vscode.ExtensionContext) {
   return {
     extendMarkdownIt(md: MarkdownIt) {
-      return md.use(markdownItD2);
+      const highlight = md.options.highlight;
+      md.options.highlight = (code: any, lang: any) => {
+        if (lang && lang.match(/\bd2\b/i)) {
+          return `<div class="d2">${code}</div>`;
+        }
+        return highlight(code, lang);
+      };
+      return md;
     },
-  };
-}
-
-function markdownItD2(md: MarkdownIt) {
-  const fallback = md.renderer.rules.fence;
-
-  md.renderer.rules.fence = (tokens, idx, options, env, self) => {
-    const token = tokens[idx];
-    const attrs = matchD2Token(token.info, token.attrs);
-
-    console.log(attrs);
-
-    return fallback?.(tokens, idx, options, env, self) ?? `<pre>${token.content}</pre>`;
   };
 }
 
