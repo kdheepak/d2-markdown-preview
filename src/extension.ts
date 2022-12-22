@@ -40,6 +40,7 @@ function d2Worker(state: any) {
   }
 }
 
+// @ts-ignore
 function isD2Image(token: MarkdownIt.Token): boolean {
   if (token.type !== "fence") {
     return false;
