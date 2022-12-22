@@ -28,24 +28,35 @@ function d2Worker(state: any) {
   for (let i = 0; i < state.tokens.length; i++) {
     const token = state.tokens[i];
     if (token.type === "fence" && token.info === "d2") {
-      // Generate SVG output using the `d2` command line program
-      const output = viz.renderString(token.content);
-      // Replace the fenced code block token with an HTML block token containing the generated SVG output
-      state.tokens[i] = new state.Token("html_block", "", 0);
-      state.tokens[i].content = output;
+      token.type = "d2";
+      token.tag = "img";
     }
   }
 }
 
+function renderD2Html(tokens: markdownIt.Token[], idx: number) {
+  const viz = new D2Viz();
+  const content = viz.renderString(tokens[idx].content);
+  return content;
+}
+
 function d2MarkdownItPlugin(md: markdownIt) {
   md.core.ruler.push("d2", d2Worker);
+  md.renderer.rules.d2 = renderD2Html;
 }
 
 export function activate(context: vscode.ExtensionContext) {
   console.log('debugprint: Congratulations, your extension "d2-markdown-preview" is now active!');
   return {
     extendMarkdownIt(md: any) {
-      return md.use(d2MarkdownItPlugin);
+      const highlight = md.options.highlight;
+      md.options.highlight = (code, lang) => {
+        if (lang && lang.match(/\bd2\b/i)) {
+          return `<div class="d2">${code}</div>`;
+        }
+        return highlight(code, lang);
+      };
+      return md;
     },
   };
 }
