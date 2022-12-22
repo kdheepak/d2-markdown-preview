@@ -67,14 +67,14 @@ function renderD2Html(tokens, idx) {
         layout = elem.split("=")[1];
       }
       if (elem.startsWith("theme")) {
-        theme = elem.split("=")[1].parseInt();
+        theme = parseInt(elem.split("=")[1]);
       }
     }
   }
-  if (layout === null) {
+  if (layout === null || layout === undefined) {
     layout = "elk";
   }
-  if (Number.isNaN(theme) || theme === null) {
+  if (Number.isNaN(theme) || theme === undefined || theme === null) {
     theme = 0;
   }
   const content = viz.renderString(token.content, layout, theme);
