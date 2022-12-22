@@ -56,7 +56,7 @@ function renderD2Html(tokens, idx) {
   if (token.type !== "d2") {
     return token.content;
   }
-  let layout = "elk";
+  let layout = "dagre";
   let theme = 0;
   if (token.info.split(" ").length !== 1) {
     for (const elem of token.info.split(" ")) {
@@ -72,7 +72,7 @@ function renderD2Html(tokens, idx) {
     }
   }
   if (layout === null || layout === undefined) {
-    layout = "elk";
+    layout = "dagre";
   }
   if (Number.isNaN(theme) || theme === undefined || theme === null) {
     theme = 0;
