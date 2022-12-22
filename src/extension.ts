@@ -49,16 +49,8 @@ function d2MarkdownItPlugin(md: markdownIt) {
 export function activate(context: vscode.ExtensionContext) {
   console.log('debugprint: Congratulations, your extension "d2-markdown-preview" is now active!');
   return {
-    extendMarkdownIt(md: any) {
-      const highlight = md.options.highlight;
-      // @ts-ignore
-      md.options.highlight = (code, lang) => {
-        if (lang && lang.match(/\bd2\b/i)) {
-          return `<div class="d2">${code}</div>`;
-        }
-        return highlight(code, lang);
-      };
-      return md;
+    extendMarkdownIt(md: markdownIt) {
+      return md.use(d2MarkdownItPlugin);
     },
   };
 }
