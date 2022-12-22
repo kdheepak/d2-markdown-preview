@@ -34,6 +34,7 @@ function d2Worker(state: any) {
   }
 }
 
+// @ts-ignore
 function renderD2Html(tokens: markdownIt.Token[], idx: number) {
   const viz = new D2Viz();
   const content = viz.renderString(tokens[idx].content);
@@ -50,6 +51,7 @@ export function activate(context: vscode.ExtensionContext) {
   return {
     extendMarkdownIt(md: any) {
       const highlight = md.options.highlight;
+      // @ts-ignore
       md.options.highlight = (code, lang) => {
         if (lang && lang.match(/\bd2\b/i)) {
           return `<div class="d2">${code}</div>`;
