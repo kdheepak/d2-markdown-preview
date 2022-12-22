@@ -6,7 +6,7 @@
   },
   "description": "Add d2 markdown preview to VSCode builtin markdown preview",
   "publisher": "kdheepak",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "engines": {
     "vscode": "^1.74.0"
   },
