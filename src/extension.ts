@@ -35,9 +35,13 @@ function d2Worker(state: any) {
 }
 
 // @ts-ignore
-function renderD2Html(tokens: markdownIt.Token[], idx: number) {
+function renderD2Html(tokens, idx) {
   const viz = new D2Viz();
-  const content = viz.renderString(tokens[idx].content);
+  let token = tokens[idx];
+  if (token.type !== "d2") {
+    return token.content;
+  }
+  const content = viz.renderString(token.content);
   return content;
 }
 
