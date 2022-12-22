@@ -9,15 +9,27 @@ import * as markdownIt from "markdown-it";
 
 class D2Viz {
   renderString(source: string) {
-    // Generate a unique file name
     const now = `${Date.now()}`;
     const tmpInFile = `${os.tmpdir()}/d2-${now}.d2`;
     const tmpOutFile = `${os.tmpdir()}/d2-${now}.svg`;
 
-    // Write to the temporary file
     fs.writeFileSync(tmpInFile, source, "utf8");
 
-    execSync(`d2 ${tmpInFile} ${tmpOutFile}`, { stdio: "inherit" });
+    try {
+      execSync(`d2 ${tmpInFile} ${tmpOutFile}`, {
+        windowsHide: true,
+      });
+    } catch (err) {
+      // @ts-ignore
+      const s = err.stderr.toString();
+      return `
+      <pre>
+      <code>
+      ${s}
+      </code>
+      </pre>
+      `;
+    }
     const contents = fs.readFileSync(tmpOutFile, "utf8");
     return contents;
   }
