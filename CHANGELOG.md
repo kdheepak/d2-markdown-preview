@@ -4,6 +4,9 @@ All notable changes to the "d2-markdown-preview" extension will be documented in
 
 Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
 
+## [v0.0.8]
+
+- Change defaults to `d2` defaults
 
 ## [v0.0.7]
 
